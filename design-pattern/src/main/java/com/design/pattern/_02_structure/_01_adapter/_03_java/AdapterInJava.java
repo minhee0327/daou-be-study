@@ -1,4 +1,4 @@
-package com.design.pattern._02_adapter._03_java;
+package com.design.pattern._02_structure._01_adapter._03_java;
 
 import java.io.*;
 import java.util.*;
