@@ -1,4 +1,5 @@
 package chapter07
 
-class Example02 {
+operator fun Point.plus(other: Point): Point{
+    return Point(x + other.x, y + other.y)
 }
