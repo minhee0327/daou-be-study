@@ -2,6 +2,7 @@ package com.design.pattern._03_behavior._06_memento._02_after;
 
 import com.design.pattern._03_behavior._06_memento._01_before.Game;
 
+//GareTaker 역할
 public class Client {
     public static void main(String[] args) {
         Game game = new Game();
