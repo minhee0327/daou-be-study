@@ -10,9 +10,9 @@ import java.sql.*;
 import java.util.NoSuchElementException;
 
 /*
-* 트랜잭션 - 트랜잭션 메니저
-* DataSourceUtils.getConnection()
-* DataSourceUtils.releaseConnection()
+ * 트랜잭션 - 트랜잭션 메니저
+ * DataSourceUtils.getConnection()
+ * DataSourceUtils.releaseConnection()
  */
 
 @Slf4j
