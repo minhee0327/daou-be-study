@@ -1,2 +1,11 @@
-package hello.spring.repository;public interface SpringDataJpaMemberRepository {
+package hello.spring.repository;
+
+import hello.spring.domain.Member;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface SpringDataJpaMemberRepository extends JpaRepository<Member, Long>, MemberRepository {
+
+    Optional<Member> findByName(String name);
 }
