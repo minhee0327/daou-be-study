@@ -136,7 +136,7 @@ TIL (7/25 - 7/31)
 * AOP: Aspect Oriented Programming
 * 공통관심사항과 핵심관심사항 분리
 
-![스크린샷 2022-07-30 오후 1.26.05](/Users/minhee/IdeaProjects/daou-be-study/spring-intro/src/main/resources/static/스크린샷 2022-07-30 오후 1.26.05.png)
+![스크린샷 2022-07-30 오후 1.26.05]([/Users/minhee/IdeaProjects/daou-be-study/spring-intro/src/main/resources/static/스크린샷 2022-07-30 오후 1.26.05.png](https://github.com/minhee0327/daou-be-study/blob/main/spring-intro/src/main/resources/static/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-30%20%EC%98%A4%ED%9B%84%201.26.05.png))
 
 ---
 
