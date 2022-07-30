@@ -25,7 +25,7 @@ TIL (7/25 - 7/31)
 
 
 
-![@ResponseBody 사용원리](https://github.com/minhee0327/daou-be-study/blob/main/spring-intro/src/main/resources/static/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-30%20%EC%98%A4%EC%A0%84%208.51.53.png)
+![@ResponseBody 사용원리](https://github.com/minhee0327/daou-be-study/blob/main/spring-intro/src/main/resources/static/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-30%20%EC%98%A4%ED%9B%84%201.26.05.png)
 
 > `spring-boot-devtools` 라이브러리 추가시 html 파일 컴파일만 해주면 서버 재시작없이 view 파일에 대한 변경이 가능하다
 
