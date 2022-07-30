@@ -14,7 +14,7 @@ TIL (7/25 - 7/31)
 
 ## 템플릿 엔진 동작 환경 그림
 
-![템플릿 엔진 동작 환경](https://github.com/minhee0327/daou-be-study/tree/main/spring-intro/src/main/resources/static/스크린샷 2022-07-30 오전 8.43.13.png)
+![템플릿 엔진 동작 환경](https://github.com/minhee0327/daou-be-study/blob/main/spring-intro/src/main/resources/static/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-30%20%EC%98%A4%EC%A0%84%208.43.13.png)
 
 * 컨트롤러에서 리턴값으로 문자를 반환하면 뷰 리졸버(viewResolver)가 화면을 찾아 처리
   * 스프링 부트 템플린 엔진의 기본 viewName 매핑
@@ -25,7 +25,7 @@ TIL (7/25 - 7/31)
 
 
 
-![@ResponseBody 사용원리](https://github.com/minhee0327/daou-be-study/tree/main/spring-intro/src/main/resources/static/스크린샷 2022-07-30 오전 8.51.53.png)
+![@ResponseBody 사용원리](https://github.com/minhee0327/daou-be-study/blob/main/spring-intro/src/main/resources/static/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-30%20%EC%98%A4%EC%A0%84%208.51.53.png)
 
 > `spring-boot-devtools` 라이브러리 추가시 html 파일 컴파일만 해주면 서버 재시작없이 view 파일에 대한 변경이 가능하다
 
@@ -46,7 +46,7 @@ TIL (7/25 - 7/31)
 
 ## 정적 컨텐츠
 
-![정적컨텐츠 이미지](https://github.com/minhee0327/daou-be-study/tree/main/spring-intro/src/main/resources/static/스크린샷 2022-07-30 오전 8.48.55.png)
+![정적컨텐츠 이미지](https://github.com/minhee0327/daou-be-study/blob/main/spring-intro/src/main/resources/static/%EC%8A%A4%ED%81%AC%EB%A6%B0%EC%83%B7%202022-07-30%20%EC%98%A4%EC%A0%84%208.48.55.png)
 
 
 
