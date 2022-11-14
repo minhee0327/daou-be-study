@@ -1,6 +1,9 @@
 package com.daou.oauth.member
 
-class MemberDto(
+/*
+* MemberDto
+* */
+class UserInfoBean(
     val name: String,
     val age: Int,
 ) {
