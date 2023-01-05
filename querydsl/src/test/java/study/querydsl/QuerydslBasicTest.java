@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.dto.MemberDto;
+import study.querydsl.dto.QMemberDto;
 import study.querydsl.dto.UserDto;
 import study.querydsl.entity.Member;
 import study.querydsl.entity.QMember;
@@ -559,11 +560,11 @@ public class QuerydslBasicTest {
         QMember memberSub = new QMember("memberSub");
         List<UserDto> result = queryFactory
                 .select(Projections.fields(UserDto.class,
-                        member.username.as("name"),
-                        ExpressionUtils.as(
-                                JPAExpressions
-                                        .select(memberSub.age.max())
-                                        .from(memberSub),"age")
+                                member.username.as("name"),
+                                ExpressionUtils.as(
+                                        JPAExpressions
+                                                .select(memberSub.age.max())
+                                                .from(memberSub), "age")
                         )
                 )
                 .from(member)
@@ -574,6 +575,7 @@ public class QuerydslBasicTest {
         }
     }
 
+    //constructor 를 사용하면 런타임시에 이러가 나므로 컴파일 타임에서 에러를 잡을 수 없다.
     @Test
     public void findDtoByConstructor() {
         List<UserDto> result = queryFactory
@@ -584,5 +586,33 @@ public class QuerydslBasicTest {
         for (UserDto memberDto : result) {
             System.out.println("memberDto = " + memberDto);
         }
+    }
+
+    //컴파일 타임에 타입을 체킹해주는 장점이 있다.
+    @Test
+    public void findDtoQueryProjection() {
+        List<MemberDto> result = queryFactory
+                .select(new QMemberDto(member.username, member.age))
+                .from(member)
+                .fetch();
+
+        for (MemberDto memberDto : result) {
+            System.out.println("memberDto = " + memberDto);
+        }
+    }
+
+    //컴파일 시점에 타입체크를 하니까 안전하다.
+    //단점은 Q 파일을 생성해야한다는 점이다.
+    //다음 단점은 아키텍쳐에서 의존관계에 문제가 있을 수 있다.
+    //DTO 쪽에 QueryProjection 어노테이션을 넣음으로서 쿼리 dsl 에 대한 의존성을 가지게 된다.
+    //DTO 는 service, controller 등 여러 레이어에 걸쳐서 사용이 되는데, DTO안에 Query DSL이 의존이 되도록 되어있으니 순수하지 않다.
+
+
+    /*
+    * 동적 쿼리 BooleanBuilder 사용
+    * */
+    @Test
+    public void dynamicQuery_BooleanBuilder(){
+
     }
 }
