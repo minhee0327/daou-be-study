@@ -1,9 +1,12 @@
 package study.querydsl;
 
+import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
+import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
@@ -12,6 +15,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.dto.MemberDto;
 import study.querydsl.dto.QMemberDto;
@@ -609,10 +613,130 @@ public class QuerydslBasicTest {
 
 
     /*
-    * 동적 쿼리 BooleanBuilder 사용
-    * */
+     * 동적 쿼리 BooleanBuilder 사용
+     * */
     @Test
-    public void dynamicQuery_BooleanBuilder(){
+    public void dynamicQuery_BooleanBuilder() {
+        String usernameParam = "member1";
+        Integer ageParam = 10;
 
+        List<Member> result = searchMember1(usernameParam, ageParam);
+        assertThat(result.size()).isEqualTo(1);
+    }
+
+    private List<Member> searchMember1(String userNameCondition, Integer ageCondition) {
+        BooleanBuilder builder = new BooleanBuilder();
+        if (userNameCondition != null) {
+            builder.and(member.username.eq(userNameCondition));
+        }
+        if (ageCondition != null) {
+            builder.and(member.age.eq(ageCondition));
+        }
+
+        return queryFactory
+                .selectFrom(member)
+                .where(builder)
+                .fetch();
+    }
+
+    @Test
+    public void dynamicQuery_WhereParam(){
+        String usernameParam = "member1";
+        Integer ageParam = 10;
+
+        List<Member> result = searchMember2(usernameParam, ageParam);
+        assertThat(result.size()).isEqualTo(1);
+    }
+
+    private List<Member> searchMember2(String usernameCondition, Integer ageCondition) {
+        return queryFactory
+                .selectFrom(member)
+                .where(allEq(usernameCondition, ageCondition))
+                .fetch();
+    }
+
+    //where 절은 null 인 경우 무시하게됨 (null 이 아닌경우만 체크)
+    //반환타입
+    private BooleanExpression ageEq(Integer ageCondition) {
+        return ageCondition == null ? null : member.age.eq(ageCondition);
+    }
+
+    private BooleanExpression usernameEq(String usernameCondition) {
+        return usernameCondition == null ? null : member.username.eq(usernameCondition);
+    }
+
+    private BooleanExpression allEq(String usernameCondition, Integer ageCondition){
+        return usernameEq(usernameCondition).and(ageEq(ageCondition));
+    }
+
+    //수정, 삭제 벌크 연산
+    @Test
+    @Commit
+    public void bulkUpdate(){
+        //member1, member2 => 비회원 / 나머지 회원
+        long count = queryFactory
+                .update(member)
+                .set(member.username, "비회원")
+                .where(member.age.lt(28))
+                .execute();
+
+        // 벌크 연산시 영속성 컨텍스트에 남은 내용과 db 에 반영된 내용이 다를 수 있다.
+        // 따라서 벌크 연산후에는 flush && clear 를 해주는 습관..!
+
+        em.flush();
+        em.clear();
+
+        List<Member> result = queryFactory
+                .selectFrom(member)
+                .fetch();
+
+        for (Member member1 : result) {
+            System.out.println("member1 = " + member1);
+        }
+    }
+
+    @Test
+    public void bulkAdd(){
+        long count = queryFactory
+                .update(member)
+                .set(member.age, member.age.add(1))  //add, multiple
+                .execute();
+    }
+
+    @Test
+    public void bulkDelete(){
+        long count = queryFactory
+                .delete(member)
+                .where(member.age.gt(18))
+                .execute();
+    }
+
+    @Test
+    public void sqlFunction(){
+        List<String> result = queryFactory
+                .select(
+                        Expressions
+                                .stringTemplate("function('replace', {0}, {1}, {2})", member.username, "member1", "M"))
+                .from(member)
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+        }
+    }
+
+    @Test
+    public void sqlFunction2(){
+        List<String> result = queryFactory
+                .select(member.username)
+                .from(member)
+//                .where(member.username.eq(Expressions.stringTemplate("function('lower', {0})", member.username)))
+                .where(member.username.eq(member.username.lower()))
+                .fetch();
+
+        for (String s : result) {
+            System.out.println("s = " + s);
+
+        }
     }
 }
