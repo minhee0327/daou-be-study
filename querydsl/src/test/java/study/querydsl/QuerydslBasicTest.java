@@ -4,7 +4,6 @@ import com.querydsl.core.BooleanBuilder;
 import com.querydsl.core.QueryResults;
 import com.querydsl.core.Tuple;
 import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Predicate;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.core.types.dsl.CaseBuilder;
@@ -29,7 +28,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceUnit;
 import java.util.List;
 
-import static com.querydsl.jpa.JPAExpressions.*;
+import static com.querydsl.jpa.JPAExpressions.select;
 import static org.assertj.core.api.Assertions.assertThat;
 import static study.querydsl.entity.QMember.member;
 import static study.querydsl.entity.QTeam.team;
@@ -640,7 +639,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    public void dynamicQuery_WhereParam(){
+    public void dynamicQuery_WhereParam() {
         String usernameParam = "member1";
         Integer ageParam = 10;
 
@@ -665,14 +664,14 @@ public class QuerydslBasicTest {
         return usernameCondition == null ? null : member.username.eq(usernameCondition);
     }
 
-    private BooleanExpression allEq(String usernameCondition, Integer ageCondition){
+    private BooleanExpression allEq(String usernameCondition, Integer ageCondition) {
         return usernameEq(usernameCondition).and(ageEq(ageCondition));
     }
 
     //수정, 삭제 벌크 연산
     @Test
     @Commit
-    public void bulkUpdate(){
+    public void bulkUpdate() {
         //member1, member2 => 비회원 / 나머지 회원
         long count = queryFactory
                 .update(member)
@@ -696,7 +695,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    public void bulkAdd(){
+    public void bulkAdd() {
         long count = queryFactory
                 .update(member)
                 .set(member.age, member.age.add(1))  //add, multiple
@@ -704,7 +703,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    public void bulkDelete(){
+    public void bulkDelete() {
         long count = queryFactory
                 .delete(member)
                 .where(member.age.gt(18))
@@ -712,7 +711,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    public void sqlFunction(){
+    public void sqlFunction() {
         List<String> result = queryFactory
                 .select(
                         Expressions
@@ -726,7 +725,7 @@ public class QuerydslBasicTest {
     }
 
     @Test
-    public void sqlFunction2(){
+    public void sqlFunction2() {
         List<String> result = queryFactory
                 .select(member.username)
                 .from(member)
