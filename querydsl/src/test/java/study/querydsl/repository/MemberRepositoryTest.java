@@ -17,43 +17,29 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Transactional
-class MemberJpaRepositoryTest {
+public class MemberRepositoryTest {
 
     @Autowired
     EntityManager em;
 
     @Autowired
-    MemberJpaRepository memberJpaRepository;
+    MemberRepository memberRepository;
 
     @Test
     public void basicTest(){
         Member member = new Member("member1", 10);
-        memberJpaRepository.save(member);
+        memberRepository.save(member);
 
-        Member findMember = memberJpaRepository.findById(member.getId()).get();
+        Member findMember = memberRepository.findById(member.getId()).get();
         assertThat(findMember).isEqualTo(member);
 
-        List<Member> result1 = memberJpaRepository.findAll();
+        List<Member> result1 = memberRepository.findAll();
         assertThat(result1).containsExactly(member);
 
-        List<Member> result2 = memberJpaRepository.findByUsername("member1");
+        List<Member> result2 = memberRepository.findByUsername("member1");
         assertThat(result2).containsExactly(member);
     }
 
-    @Test
-    public void basicQueryDslTest(){
-        Member member = new Member("member1", 10);
-        memberJpaRepository.save(member);
-
-        Member findMember = memberJpaRepository.findById(member.getId()).get();
-        assertThat(findMember).isEqualTo(member);
-
-        List<Member> result1 = memberJpaRepository.findAll_Querydsl();
-        assertThat(result1).containsExactly(member);
-
-        List<Member> result2 = memberJpaRepository.findByUsername_Querydsl("member1");
-        assertThat(result2).containsExactly(member);
-    }
 
     @Test
     public void searchTest(){
@@ -79,7 +65,9 @@ class MemberJpaRepositoryTest {
         condition.setTeamName("teamB");
 
 //        List<MemberTeamDto> result = memberJpaRepository.searchByBuilder(condition);
-        List<MemberTeamDto> result = memberJpaRepository.search(condition);
+        List<MemberTeamDto> result = memberRepository.search(condition);
         assertThat(result).extracting("username").containsExactly("member4");
     }
+
+
 }
