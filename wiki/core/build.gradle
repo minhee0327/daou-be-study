@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+}
+
+//version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+//실행가능한 Jar를 만드려한다. main 이 필요없으면 false
+bootJar{
+    enabled = false
+}
+
+jar {
+    enabled = true
+}
