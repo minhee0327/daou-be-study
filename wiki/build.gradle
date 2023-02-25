@@ -38,3 +38,9 @@ project(':chapter04') {
         implementation project(':core')
     }
 }
+
+project(':chapter05') {
+    dependencies {
+        implementation project(':core')
+    }
+}
