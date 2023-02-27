@@ -1,5 +1,5 @@
 buildscript {
-    ext{
+    ext {
         springBootVersion = '3.0.2'
     }
     repositories {
@@ -29,6 +29,7 @@ subprojects {
         annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
         annotationProcessor 'org.projectlombok:lombok'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
     }
 }
 
