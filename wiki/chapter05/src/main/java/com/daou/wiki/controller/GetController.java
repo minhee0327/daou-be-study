@@ -1,6 +1,8 @@
 package com.daou.wiki.controller;
 
 import com.daou.wiki.dto.MemberDto;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -37,10 +39,11 @@ public class GetController {
 
     //5.2.4 @RequestParam 을 활용한 GET 메서드 구현
     @GetMapping(value = "/request1")
+    @Operation(summary = "GET 메서드 예제", description = "@RequestParam 을 활용한 GET Method")
     public String getRequestParam(
-            @RequestParam String name,
-            @RequestParam String email,
-            @RequestParam String organization) {
+            @Parameter(description = "이름", required = true) @RequestParam String name,
+            @Parameter(description = "이메일", required = true) @RequestParam String email,
+            @Parameter(description = "회사", required = true) @RequestParam String organization) {
         return name + " " + email + " " + organization;
     }
 
