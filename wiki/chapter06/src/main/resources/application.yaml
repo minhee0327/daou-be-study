@@ -1,0 +1,16 @@
+server:
+  port: 8086
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springboot?useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: minhee
+    password: wiki1234! # 보안상의 이유로 암호화 해서 사용하는것이 일반적
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create  # 운영환경에서는 (validate || none)ㅡ
+    properties:
+      hibernate:
+        format_sql: true
+    database: mysql

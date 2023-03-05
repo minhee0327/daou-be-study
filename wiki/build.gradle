@@ -45,3 +45,12 @@ project(':chapter05') {
         implementation project(':core')
     }
 }
+
+project(':chapter06') {
+    dependencies {
+        implementation project(':core')
+    }
+}
+
+//여기부터 db 설정필요할 경우 chapter06(jpa) project 로 추가
+
