@@ -6,12 +6,12 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 //setter 책 따라할때만.
-@Setter
+@Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
