@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
+@ToString(exclude = "name")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
