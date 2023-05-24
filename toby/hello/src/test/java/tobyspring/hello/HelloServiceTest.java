@@ -17,7 +17,7 @@ public class HelloServiceTest {
     }
 
     @Test
-    void helloDecorator(){
+    void helloDecorator() {
         HelloDecorator decorator = new HelloDecorator(name -> name);
 
         String ret = decorator.sayHello("Test");
